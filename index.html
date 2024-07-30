@@ -107,9 +107,9 @@
 </body>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <!-- <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/35984/ScrubGSAPTimeline_3_0.js"></script> -->
-    <!-- <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/InertiaPlugin.min.js"></script>
-    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script> -->
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/35984/ScrubGSAPTimeline_3_0.js"></script>
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/InertiaPlugin.min.js"></script>
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/DrawSVGPlugin3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Draggable.min.js"></script>
     <script type="text/javascript">
 class App {
@@ -117,10 +117,10 @@ class App {
  
  select = e => document.querySelector(e);
 selectAll = e => document.querySelectorAll(e); 
-// mainTl = gsap.timeline();
-//    heartFill = this.select('.heartFill');
+mainTl = gsap.timeline();
+   heartFill = this.select('.heartFill');
 maxDrag = 705;
-//    heartFillMaxPosY = -50;
+   heartFillMaxPosY = -50;
 draggerProp = gsap.getProperty('.dragger');
 trackTween = null;
 
@@ -129,9 +129,9 @@ constructor(){
     let followerVX = 0;
     let liquidFollowerY = 0;
     let followerProp = gsap.getProperty('.follower');
- //    gsap.set('.heartFill', {
- //     transformOrigin:'50% 0%'
- //    })      
+    gsap.set('.heartFill', {
+     transformOrigin:'50% 0%'
+    })      
     this.myDragger = Draggable.create('.dragger', {
         type:'x',
         bounds:{minX:50, maxX:this.maxDrag, minY:0, maxY:0},
@@ -198,17 +198,17 @@ modifiers:{
  })
 }
 })
-//   gsap.to('.heartFill', {
-//    rotation:'+=0',
-//    repeat:-1,
-//    ease: 'linear',
-//    modifiers: {
-//     rotation: gsap.utils.unitize((rotation) => {
-//      let val = rotation+liquidFollowerY*0.5;
-//       return (val)
-//     })
-//    }
-//   })
+  gsap.to('.heartFill', {
+   rotation:'+=0',
+   repeat:-1,
+   ease: 'linear',
+   modifiers: {
+    rotation: gsap.utils.unitize((rotation) => {
+     let val = rotation+liquidFollowerY*0.5;
+      return (val)
+    })
+   }
+  })
 
 this.onDrag();
 
@@ -219,19 +219,19 @@ onDrag(){
     let posX = this.draggerProp('x');
     let progress = posX / this.maxDrag;
     gsap.to('.heartChat', 0.1, {
-        x: posX - 40
+        x: posX - 50
     })   
-let percent = progress * 200;
-  //  let percentY = progress * this.heartFillMaxPosY;
-//console.log(`0% ${percent}%`)
+let percent = progress * 100;
+   let percentY = progress * this.heartFillMaxPosY;
+console.log(`0% ${percent}%`)
     this.trackTween = gsap.to('.track',  {
     drawSVG: `100% ${percent}%`,
     ease: 'elastic(0.4, 0.16)'
     })
- //    gsap.to('.heartFill', {
- //     duration: 0.1,
- //     y: percentY
- //    })
+    gsap.to('.heartFill', {
+     duration: 0.1,
+     y: percentY
+    })
 
 if(progress == 1){    
 //you reached the end
